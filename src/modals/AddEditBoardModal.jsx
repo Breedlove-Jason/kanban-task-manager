@@ -1,4 +1,8 @@
-function AddEditBoardModal({ setBoardModalOpen }) {
+import PropTypes from "prop-types";
+import { useState } from "react";
+
+function AddEditBoardModal({ setBoardModalOpen, type }) {
+  const [name, setName] = useState("");
   return (
     <div
       onClick={(e) => {
@@ -18,10 +22,32 @@ function AddEditBoardModal({ setBoardModalOpen }) {
           "scrollbar-hide overflow-y-scroll max-h-[95vh] bg-white dark:bg-[#2b2c37] text-black dark:text-white font-bold shadow-md shadow-[#364e7e1a] max-w-md mx-auto w-full px-8 py-8 rounded-xl"
         }
       >
-        <h3 className={""}></h3>
+        <h3 className={"text-lg"}>{type === "edit" ? "Edit" : "Add New"}</h3>
+
+        {/*Task Name*/}
+
+        <div className={"mt-8 flex flex-col space-y-3"}>
+          <label className={"text-sm dark:text-white text-gray-500"}>
+            Board Columns
+          </label>
+          <input
+            className={
+              "bg-transparent px-4 py-2 rounded-md text-sm border border-gray-600 outline-none focus:outline-[#635fc7] outline-1 ring-0"
+            }
+            placeholder={"e.g Web Design"}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            id={"board-name-input"}
+          />
+        </div>
       </div>
     </div>
   );
 }
-
+AddEditBoardModal.propTypes = {
+  setBoardModalOpen: PropTypes.func.isRequired,
+};
+// AddEditBoardModal.propTypes = {
+//   type: PropTypes.func.isRequired,
+// };
 export default AddEditBoardModal;
