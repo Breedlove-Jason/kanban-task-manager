@@ -3,9 +3,10 @@ import iconDown from "../../assets/icon-chevron-down.svg";
 import iconUp from "../../assets/icon-chevron-up.svg";
 import ellipsis from "../../assets/icon-vertical-ellipsis.svg";
 import { useState } from "react";
+import HeaderDropdown from "../headerDropdown/HeaderDropdown.jsx";
 
 function Header() {
-  const [openDropDown, setOpenDropDown] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
   return (
     <div className={"p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0"}>
       <header className={"flex justify-between dark:text-white items-center"}>
@@ -26,10 +27,10 @@ function Header() {
               board Name
             </h3>
             <img
-              src={openDropDown ? iconUp : iconDown}
+              src={openDropdown ? iconUp : iconDown}
               alt={"dropdown icon"}
               className={"w-3 ml-2 md:hidden"}
-              onClick={() => setOpenDropDown((state) => !state)}
+              onClick={() => setOpenDropdown((state) => !state)}
             />
           </div>
         </div>
@@ -43,6 +44,7 @@ function Header() {
           />
         </div>
       </header>
+      {openDropdown && <HeaderDropdown setOpenDropdown={setOpenDropdown}/>}
     </div>
   );
 }
