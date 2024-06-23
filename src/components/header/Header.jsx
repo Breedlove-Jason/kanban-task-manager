@@ -52,7 +52,9 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
           setOpenDropdown={setOpenDropdown}
         />
       )}
-      {boardModalOpen && <AddEditBoardModal />}
+      {boardModalOpen && (
+        <AddEditBoardModal setBoardModalOpen={setBoardModalOpen} />
+      )}
     </div>
   );
 }

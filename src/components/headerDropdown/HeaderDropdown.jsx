@@ -52,7 +52,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
           ))}
           <div
             className={
-              "flex items-baseline space-x-2 text-[#635fc7] px-5 py-4 "
+              "cursor-pointer flex items-baseline space-x-2 text-[#635fc7] px-5 py-4 "
             }
             onClick={() => {
               setBoardOpenModal(true);
@@ -87,5 +87,8 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
 
 HeaderDropdown.propTypes = {
   setOpenDropdown: PropTypes.func.isRequired,
+};
+HeaderDropdown.propTypes = {
+  setBoardOpenModal: PropTypes.func.isRequired,
 };
 export default HeaderDropdown;
