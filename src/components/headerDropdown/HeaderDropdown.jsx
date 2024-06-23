@@ -1,4 +1,10 @@
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import boardIcon from '../../assets/icon-board.svg';
+
 function HeaderDropdown({ setOpenDropdown }) {
+  const boards = useSelector((state) => state.boards);
+  console.log('BOARDS=', boards);
   return (
     <div
       className={
@@ -20,12 +26,24 @@ function HeaderDropdown({ setOpenDropdown }) {
         <h3
           className={'dark:text-gray-300 text-gray-600 font-semibold mx-4 mb-8'}
         >
-          All Boards
+          All Boards ({boards.length})
         </h3>
-        <div></div>
+        <div>
+          {boards.map((board, index) => (
+            <div
+              className={`flex items-baseline space-x-2 px-5 py-4 ${board.isActive && 'bg-[#635fc7] rounded-r-full text-white mr-8'}`}
+              key={index}
+            >
+              <img src={boardIcon} alt={'boardIcon'} className={'w-6 h-6'} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
+HeaderDropdown.propTypes = {
+  setOpenDropdown: PropTypes.func.isRequired,
+};
 export default HeaderDropdown;
