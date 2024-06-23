@@ -34,7 +34,8 @@ function HeaderDropdown({ setOpenDropdown }) {
               className={`flex items-baseline space-x-2 px-5 py-4 ${board.isActive && 'bg-[#635fc7] rounded-r-full text-white mr-8'}`}
               key={index}
             >
-              <img src={boardIcon} alt={'boardIcon'} className={'w-6 h-6'} />
+              <img src={boardIcon} alt={'boardIcon'} className={'h-4'} />
+              <p className={'text-lg font-bold'}>{board.name}</p>
             </div>
           ))}
         </div>
