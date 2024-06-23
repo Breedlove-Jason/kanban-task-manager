@@ -1,6 +1,7 @@
 import logo from "../../assets/logo-mobile.svg";
 import iconDown from "../../assets/icon-chevron-down.svg";
 import iconUp from "../../assets/icon-chevron-up.svg";
+import ellipsis from "../../assets/icon-vertical-ellipsis.svg";
 import { useState } from "react";
 
 function Header() {
@@ -34,6 +35,12 @@ function Header() {
         </div>
         <div className={"flex space-x-4 items-center md:space-x-6"}>
           <button className={"button"}>+ Add New Task</button>
+          <button className={"button py-1 px-3 md:hidden"}>+</button>
+          <img
+            src={ellipsis}
+            alt={"ellipsis"}
+            className={"cursor-pointer h6"}
+          />
         </div>
       </header>
     </div>
