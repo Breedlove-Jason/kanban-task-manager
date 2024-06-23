@@ -1,11 +1,16 @@
 import Header from "./components/header/Header.jsx";
 import Center from "./components/center/Center.jsx";
+import { useState } from "react";
 
 function App() {
+  const [boardModalOpen, setBoardModalOpen] = useState(false);
   return (
     <div>
       {/*Header Section*/}
-      <Header />
+      <Header
+        boardModalOpen={boardModalOpen}
+        setBoardModalOpen={setBoardModalOpen}
+      />
 
       {/*Center Section*/}
       <Center />
