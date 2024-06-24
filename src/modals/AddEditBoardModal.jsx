@@ -2,10 +2,14 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import crossIcon from '../assets/icon-cross.svg';
+import boardsSlice from '../redux/boardsSlice.js';
+import { useDispatch } from 'react-redux';
 // Video at 1:32:40
 
 function AddEditBoardModal({ setBoardModalOpen, type }) {
   const [name, setName] = useState('');
+  const dispatch = useDispatch();
+  const [isValid, setIsValid] = useState(true);
   const [newColumns, setNewColumns] = useState([
     {
       name: 'To Do',
@@ -33,7 +37,28 @@ function AddEditBoardModal({ setBoardModalOpen, type }) {
   const onDelete = (id) => {
     setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
   };
+  const validate = () => {
+    setIsValid(false);
+    if (!name.trim()) {
+      return false;
+    }
+    for (let i = 0; i < newColumns.length; i++) {
+      if (!newColumns[i].name.trim()) {
+        return false;
+      }
+    }
+    setIsValid(true);
+    return true;
+  };
 
+  const onSubmit = (type) => {
+    setBoardModalOpen(false);
+    if (type === 'add') {
+      dispatch(boardsSlice.actions.addBoard({ name, newColumns }));
+    } else {
+      dispatch(boardsSlice.actions.editBoard({ name, newColumns }));
+    }
+  };
   return (
     <div
       onClick={(e) => {
@@ -117,6 +142,17 @@ function AddEditBoardModal({ setBoardModalOpen, type }) {
             }}
           >
             + Add new column
+          </button>
+          <button
+            className={
+              'w-full items-center hover:opacity-75 dark:text-white dark:bg-[#635fc7] mt-8 relative text-white bg-[#635fc7] py-2 rounded-full'
+            }
+            onClick={() => {
+              const isValid = validate();
+              if (isValid === true) onSubmit(type);
+            }}
+          >
+            {type === 'add' ? 'Create New Board' : 'Save Changes'}
           </button>
         </div>
       </div>
