@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import crossIcon from "../assets/icon-cross.svg";
+// Video at 1:32:40
 
 function AddEditBoardModal({ setBoardModalOpen, type }) {
   const [name, setName] = useState("");
