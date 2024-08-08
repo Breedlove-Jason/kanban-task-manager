@@ -87,4 +87,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
 HeaderDropdown.propTypes = {
   setOpenDropdown: PropTypes.func.isRequired,
 };
+HeaderDropdown.propTypes = {
+  setBoardOpenModal: PropTypes.func.isRequired,
+};
 export default HeaderDropdown;
