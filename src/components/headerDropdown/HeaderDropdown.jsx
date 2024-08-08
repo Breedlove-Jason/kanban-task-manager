@@ -8,11 +8,9 @@ import useDarkMode from "../../Hooks/useDarkMode.js";
 import { useState } from "react";
 
 function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
-  const boards = useSelector((state) => state.boards);
+  const boards = useSelector((state) => state.boards) || [];
   const [colorTheme, setTheme] = useDarkMode();
-  const [darkSide, setDarkSide] = useState(
-    colorTheme === "light" ? true : false,
-  );
+  const [darkSide, setDarkSide] = useState(colorTheme === "light");
   // might need to pass in a value for the dark mode 'checked'
   const toggleDarkMode = () => {
     setTheme(darkSide ? "light" : "dark");
@@ -39,7 +37,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
         <h3
           className={"dark:text-gray-300 text-gray-600 font-semibold mx-4 mb-8"}
         >
-          All Boards ({boards.length})
+          All Boards ({boards?.length})
         </h3>
         <div>
           {boards.map((board, index) => (
@@ -47,7 +45,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
               className={`flex items-baseline dark:text-white space-x-2 px-5 py-4 ${board.isActive && "bg-[#635fc7] rounded-r-full text-white mr-8"}`}
               key={index}
             >
-              <img src={boardIcon} alt={"boardIcon"} className={"h-4"} />
+              <img src={boardIcon} alt="boardIcon" className={"h-4"} />
               <p className={"text-lg font-bold"}>{board.name}</p>
             </div>
           ))}
@@ -60,7 +58,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
               setOpenDropdown(false);
             }}
           >
-            <img src={boardIcon} alt={"boardIcon"} className={"h-4"} />
+            <img src={boardIcon} alt="boardIcon" className={"h-4"} />
             <p className={"text-lg font-bold"}>Create New Board</p>
           </div>
           <div
@@ -68,7 +66,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
               "mx-2 p-4 space-x-2 bg-slate-100 dark:bg-[#20212c] flex justify-center items-center rounded-lg cursor-pointer"
             }
           >
-            <img src={lightIcon} alt={"lightIcon"} />
+            <img src={lightIcon} alt="lightIcon" />
             <Switch
               checked={darkSide}
               onChange={toggleDarkMode}
@@ -78,7 +76,7 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
                 className={`${darkSide ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 transform rounded-full bg-white transition`}
               />
             </Switch>
-            <img src={darkIcon} alt={"darkIcon"} />
+            <img src={darkIcon} alt="darkIcon" />
           </div>
         </div>
       </div>
@@ -88,8 +86,5 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
 
 HeaderDropdown.propTypes = {
   setOpenDropdown: PropTypes.func.isRequired,
-};
-HeaderDropdown.propTypes = {
-  setBoardOpenModal: PropTypes.func.isRequired,
 };
 export default HeaderDropdown;
