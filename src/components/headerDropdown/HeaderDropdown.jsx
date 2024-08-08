@@ -13,7 +13,8 @@ function HeaderDropdown({ setOpenDropdown, setBoardOpenModal }) {
   const [darkSide, setDarkSide] = useState(
     colorTheme === "light" ? true : false,
   );
-  const toggleDarkMode = (checked) => {
+  // might need to pass in a value for the dark mode 'checked'
+  const toggleDarkMode = () => {
     setTheme(darkSide ? "light" : "dark");
     setDarkSide(!darkSide);
   };
