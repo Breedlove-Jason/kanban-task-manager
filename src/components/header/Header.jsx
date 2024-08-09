@@ -6,6 +6,7 @@ import { useState } from "react";
 import HeaderDropdown from "../headerDropdown/HeaderDropdown.jsx";
 import AddEditBoardModal from "../../modals/AddEditBoardModal.jsx";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 
 /**
  * Header component for the Kanban application.
@@ -16,12 +17,15 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} - The rendered Header component.
  */
 function Header({ setBoardModalOpen, boardModalOpen }) {
+  const dispatch = useDispatch();
   // State to manage the visibility of the dropdown menu
   const [openDropdown, setOpenDropdown] = useState(false);
 
   // State to manage the type of board operation (add/edit)
   const [boardType] = useState("add");
 
+  const boards = useSelector((state) => state.boards);
+  const activeBoard = boards.find((board) => board.isActive);
   return (
     <div className={"p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0"}>
       <header className={"flex justify-between dark:text-white items-center"}>
@@ -39,7 +43,7 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
                 "truncate max-w-[200px] md:text-2xl text-x1 font-bold md:ml20 font-sans"
               }
             >
-              board Name
+              {activeBoard.name}
             </h3>
             <img
               src={openDropdown ? iconUp : iconDown}
